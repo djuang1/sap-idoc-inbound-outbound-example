@@ -17,8 +17,8 @@ http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/m
 	</sap:sap-config>
 	<flow name="sap-idoc-inbound" doc:id="81425972-b65d-4526-9704-f0df19a43105" >
 		<sap:document-listener doc:name="Document listener" doc:id="244534ff-af5c-45e4-bca8-556f42e25d18" config-ref="SAP_Config" gatewayHost="${sap.jcoGwHost}" gatewayService="${sap.jcoGwService}" programID="${sap.jcoProgramId}"/>
-		<logger level="INFO" doc:name="Logger" doc:id="1090a55a-66ba-41c8-82cb-7a392a65ada2" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="43413cef-4b85-403b-8e46-660e63380fb9" message="#[attributes.transactionId]"/>
+		<logger level="INFO" doc:name="Logger - transaction ID" doc:id="43413cef-4b85-403b-8e46-660e63380fb9" message="#[attributes.transactionId]"/>
+		<logger level="INFO" doc:name="Logger - payload" doc:id="f0ab8038-621c-46cc-96b4-27895fc66b88" message="#[payload]"/>
 	</flow>
 	<flow name="sap-idoc-outbound" doc:id="30fbfdc5-f58a-447b-ba4c-d7355cf6814e" >
 		<http:listener doc:name="Listener" doc:id="1356c3c3-ffb5-415a-bc4f-2dc00f2f9475" config-ref="customer-api-sap-httpListenerConfig" path="/customer"/>
@@ -62,7 +62,7 @@ output application/xml
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="1ca97414-93e2-4028-905c-5b90aaff95fc" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger - payload" doc:id="1ca97414-93e2-4028-905c-5b90aaff95fc" message="#[payload]" />
 		<sap:send key="DEBMAS01" doc:id="c580f8ec-1166-44ea-9c75-497916a6d4df" config-ref="SAP_Config" doc:name="Send IDoc" />
 		<logger level="INFO" doc:name="Logger" doc:id="f5348004-8e7b-49e2-9c15-2615d8d9271e" message='#["IDoc sent to SAP"]' />
 		</flow>
